@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Arthashala</title>
+    <style>
+        /* Include the common styles from other pages */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #aac39c 0%, #92b87e 100%);
+            color: #2c2c2c;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Styles */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(170, 195, 156, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(170, 195, 156, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .logo-icon:hover {
+            transform: rotate(360deg);
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #699655;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #699655, #5a7d4a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #699655;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #699655, #5a7d4a);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: #5a7d4a;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #5a7d4a;
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* About Page Specific Styles */
+        .about-hero {
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            margin-top: 80px;
+            overflow: hidden;
+            color: #f9f7f8;
+        }
+
+        .about-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #f9f7f8;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-hero .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: #ffffff;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #699655, #5a7d4a);
+            color: #ffffff;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .about-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-card h3 {
+            color: #699655;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-card p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .about-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #699655;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(45deg, #699655, #aac39c);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c2c2c;
+            color: #ffffff;
+            padding: 3rem 2rem 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Team Section Styles */
+        .team-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #699655, #5a7d4a);
+            color: white;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .team-card {
+            text-align: center;
+            transition: all 0.3s ease;
+            padding: 2rem;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            background: #aac39c;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c2c2c;
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover .team-avatar {
+            transform: scale(1.1);
+            background: #ffffff;
+        }
+
+        .team-card h3 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .role {
+            color: #aac39c;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="https://via.placeholder.com/50x50/699655/ffffff?text=A" alt="Arthashala Logo">
+                </div>
+                <div class="logo-text">ARTHASHALA</div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="hero-content">
+            <h1>Our Story</h1>
+            <p class="hero-subtitle">Building Financial Literacy in Nepal</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Who We Are</h2>
+            
+            <div class="about-grid">
+                <div class="about-card animate-on-scroll">
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/699655/ffffff" alt="Our Vision">
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>Arthashala envisions a Nepal where every young person possesses the financial knowledge and confidence to navigate the modern economy, contribute to national prosperity, and achieve personal financial freedom.</p>
+                </div>
+
+                <div class="about-card animate-on-scroll">
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/699655/ffffff" alt="Our Mission">
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To democratize financial education in Nepal by providing accessible, culturally relevant financial literacy programs that empower young minds to make informed economic decisions and build sustainable wealth.</p>
+                </div>
+
+                <div class="about-card animate-on-scroll">
+                    <div class="about-image">
+                        <img src="https://via.placeholder.com/600x400/699655/ffffff" alt="Our Team">
+                    </div>
+                    <h3>Founded by IBDP Graduates</h3>
+                    <p>Our team combines international educational standards with a deep understanding of Nepal's unique economic landscape. We bring world-class financial education to every corner of Nepal, making it accessible, engaging, and culturally relevant.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Meet Our Leadership Team</h2>
+            <div class="team-grid">
+                <div class="team-card animate-on-scroll">
+                    <div class="team-avatar">A</div>
+                    <h3>Aryan</h3>
+                    <p class="role">Director of Operations</p>
+                </div>
+
+                <div class="team-card animate-on-scroll">
+                    <div class="team-avatar">U</div>
+                    <h3>Utkarsh</h3>
+                    <p class="role">Director of Programs</p>
+                </div>
+
+                <div class="team-card animate-on-scroll">
+                    <div class="team-avatar">S</div>
+                    <h3>Swayam</h3>
+                    <p class="role">Director of Finance and Fundraising</p>
+                </div>
+
+                <div class="team-card animate-on-scroll">
+                    <div class="team-avatar">B</div>
+                    <h3>Bramanshu</h3>
+                    <p class="role">Director of Curriculum Development</p>
+                </div>
+
+                <div class="team-card animate-on-scroll">
+                    <div class="team-avatar">K</div>
+                    <h3>Krishant</h3>
+                    <p class="role">Director of Media and Communication</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+        <div class="footer-content">
+            <p>&copy; 2025 Arthashala. Empowering Nepal's financial future, one youth at a time.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
