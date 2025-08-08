@@ -57,8 +57,8 @@
         }
 
         .logo-icon {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             transition: transform 0.3s ease;
             border-radius: 50%;
             overflow: hidden;
@@ -139,6 +139,38 @@
 
         .nav-links a.active::after {
             width: 100%;
+        }
+
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .menu-toggle .bar {
+            width: 24px;
+            height: 3px;
+            background: #699655;
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .menu-toggle.open .bar:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        .menu-toggle.open .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.open .bar:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
         }
 
         /* Hero Section */
@@ -349,7 +381,7 @@
         .about-image {
             position: relative;
             height: 400px;
-            background: linear-gradient(135deg, #aac39c, #699655);
+            background: #699655;
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -357,6 +389,49 @@
             font-size: 6rem;
             color: #ffffff;
             overflow: hidden;
+        }
+
+        .about-image img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* About highlights (replaces secondary logo) */
+        .highlight-grid {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            padding: 1.25rem;
+        }
+
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
+            padding: 1rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        .highlight-icon { font-size: 1.5rem; }
+        .highlight-text h4 {
+            margin: 0;
+            color: #386a2f;
+            font-size: 1rem;
+        }
+        .highlight-text p {
+            margin: 0;
+            color: #3a3a3a;
+            font-size: 0.9rem;
+            opacity: 0.95;
         }
 
         /* Contact Section */
@@ -452,9 +527,24 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+
             .nav-links {
                 display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(170, 195, 156, 0.98);
+                padding: 1rem 2rem;
+                flex-direction: column;
+                gap: 1rem;
+                border-bottom-left-radius: 16px;
+                border-bottom-right-radius: 16px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             }
+
+            .nav-links.open { display: flex; }
 
             .about-content {
                 grid-template-columns: 1fr;
@@ -468,6 +558,8 @@
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .highlight-grid { grid-template-columns: 1fr; }
         }
 
         /* Scroll animations */
@@ -489,11 +581,16 @@
         <div class="nav-container">
             <div class="logo">
                 <div class="logo-icon">
-                    <img src="https://via.placeholder.com/50x50/699655/ffffff?text=A" alt="Arthashala Logo">
+                    <img src="arthashala.png?v=2" alt="Arthashala Logo">
                 </div>
                 <div class="logo-text">ARTHASHALA</div>
             </div>
-            <ul class="nav-links">
+            <button class="menu-toggle" aria-label="Toggle menu" aria-controls="primary-navigation" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="nav-links" id="primary-navigation">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="programs.html">Programs</a></li>
@@ -566,53 +663,9 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about-section" id="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text animate-on-scroll">
-                    <h2>Founded by IBDP Graduates</h2>
-                    <p>Arthashala was born from the passion and vision of Nepali International Baccalaureate Diploma Programme graduates who recognized the critical gap in financial education within Nepal's youth community.</p>
-                    <p>Having experienced world-class education ourselves, we understand the transformative power of knowledge. We're committed to bringing that same standard of financial literacy education to every corner of Nepal, making it accessible, engaging, and culturally relevant.</p>
-                    <p>Our team combines international educational standards with deep understanding of Nepal's unique economic landscape, ensuring our programs are both globally informed and locally applicable.</p>
-                    <a href="#contact" class="cta-button">Get In Touch</a>
-                </div>
-                
-                <div class="about-image animate-on-scroll">
-                    <img src="https://via.placeholder.com/200x200/699655/ffffff?text=ARTHASHALA" alt="Arthashala Logo" style="width: 120px; height: 120px; object-fit: contain; border-radius: 20px;">
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title animate-on-scroll">Get In Touch</h2>
-            <div class="contact-grid">
-                <div class="contact-item animate-on-scroll">
-                    <div class="contact-icon">📧</div>
-                    <h3>Email Us</h3>
-                    <p>info@arthashala.org</p>
-                    <a href="mailto:info@arthashala.org" class="contact-button">Send Email</a>
-                </div>
-                
-                <div class="contact-item animate-on-scroll">
-                    <div class="contact-icon">💼</div>
-                    <h3>LinkedIn</h3>
-                    <p>Connect with us professionally</p>
-                    <a href="https://www.linkedin.com/company/arthashala" target="_blank" class="contact-button">Follow Us</a>
-                </div>
-                
-                <div class="contact-item animate-on-scroll">
-                    <div class="contact-icon">📸</div>
-                    <h3>Instagram</h3>
-                    <p>Follow our journey</p>
-                    <a href="https://www.instagram.com/arthashala" target="_blank" class="contact-button">@arthashala</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Footer -->
     <footer>
@@ -643,6 +696,25 @@
                 });
             });
         });
+
+        // Mobile menu toggle
+        (function() {
+            const toggle = document.querySelector('.menu-toggle');
+            const navLinks = document.getElementById('primary-navigation');
+            if (!toggle || !navLinks) return;
+            toggle.addEventListener('click', () => {
+                const isOpen = navLinks.classList.toggle('open');
+                toggle.classList.toggle('open', isOpen);
+                toggle.setAttribute('aria-expanded', String(isOpen));
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('open');
+                    toggle.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        })();
 
         // Scroll animation observer
         const observerOptions = {
